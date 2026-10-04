@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 04 okt 2026 kl 13:48
+-- Tid vid skapande: 04 okt 2026 kl 13:54
 -- Serverversion: 10.4.32-MariaDB
 -- PHP-version: 8.2.12
 
@@ -733,6 +733,20 @@ INSERT INTO `recipeingredient` (`recipename`, `ingredientname`, `ingredientquant
 ('Vegetarian Lasagne', 'Tomato', 800, 'g'),
 ('Vegetarian Lasagne', 'Wheat flour', 40, 'g'),
 ('Vegetarian Lasagne', 'Zucchini', 300, 'g');
+
+-- --------------------------------------------------------
+
+--
+-- Ersättningsstruktur för vy `recipe_and_author`
+-- (See below for the actual view)
+--
+CREATE TABLE `recipe_and_author` (
+`authorfname` varchar(50)
+,`authorlname` varchar(50)
+,`e_mail` varchar(50)
+,`recipename` varchar(50)
+,`numberofservings` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -16682,6 +16696,15 @@ INSERT INTO `zipcode` (`zipcode`, `city`) VALUES
 ('69676', 'Zinkgruvan'),
 ('69681', 'Zinkgruvan'),
 ('69696', 'Zinkgruvan');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur för vy `recipe_and_author`
+--
+DROP TABLE IF EXISTS `recipe_and_author`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recipe_and_author`  AS SELECT `a`.`authorfname` AS `authorfname`, `a`.`authorlname` AS `authorlname`, `a`.`e_mail` AS `e_mail`, `r`.`recipename` AS `recipename`, `r`.`numberofservings` AS `numberofservings` FROM (`recipe` `r` left join `author` `a` on(`r`.`e_mail` = `a`.`e_mail`)) ;
 
 --
 -- Index för dumpade tabeller
