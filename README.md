@@ -63,6 +63,16 @@ CALL GetMenuRecipes('Italian Evening');
 CALL GetRecipeInstructions('Swedish Meatballs');
 ```
 
+## Views
+
+`recipe_and_author` lists recipes with their authors’ names, email addresses and serving counts. It uses a LEFT JOIN to include recipes without an author.
+
+Example:
+```sql
+SELECT *
+FROM recipe_and_author
+ORDER BY authorfname, authorlname, recipename;
+
 ## ER Diagram
 
 <img width="1625" height="786" alt="Skärmbild 2026-10-04 131629" src="https://github.com/user-attachments/assets/182d298e-a77c-416e-8f9f-ada5743ef837" />
